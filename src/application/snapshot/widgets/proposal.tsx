@@ -3,7 +3,7 @@ import {
   Pagination,
   PaginationComponent,
   PulsingLoadingBar,
-  WidgetBase,
+  WidgetTab,
   classes,
 } from 'shared/ui';
 import { getDifferenceInDays, getEndsInLabel } from 'shared/utils';
@@ -12,6 +12,7 @@ import { ProposalData } from '../types';
 import { getProposalAuthor, getProposalUrl, getUserUrl } from '../utils';
 
 interface Properties {
+  twitterHandle: string;
   data: ProposalData;
   className?: string;
   top?: number;
@@ -21,6 +22,7 @@ interface Properties {
 }
 
 export const Proposal = ({
+  twitterHandle,
   data,
   className,
   top,
@@ -29,11 +31,10 @@ export const Proposal = ({
   onClose,
 }: Properties) => {
   return (
-    <WidgetBase
-      className={classes(
-        'rounded-[0.375rem] bg-[#2d2d2d] text-xs leading-tight',
-        className,
-      )}
+    <WidgetTab
+      twitterHandle={twitterHandle}
+      tabName="snapshot"
+      className={classes('bg-[#2d2d2d] text-xs leading-tight', className)}
       top={top}
       onClose={onClose}
     >
@@ -49,7 +50,7 @@ export const Proposal = ({
         </a>
         <Chip>Active</Chip>
       </header>
-      <main className="mt-2">
+      <main className="my-2">
         <p className="line-clamp-[1] break-all text-base font-semibold">
           {data.title}
         </p>
@@ -67,7 +68,7 @@ export const Proposal = ({
             rel="noopener noreferrer"
             target="_blank"
           >
-            <Chip className="py-1" variant="info" width="long">
+            <Chip className="border py-1" variant="info" width="long">
               Vote
             </Chip>
           </a>
@@ -77,6 +78,6 @@ export const Proposal = ({
           buttonClassNames="text-white bg-transparent hover:enabled:bg-transparent active:enabled:bg-transparent"
         />
       </footer>
-    </WidgetBase>
+    </WidgetTab>
   );
 };

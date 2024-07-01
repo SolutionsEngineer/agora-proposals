@@ -1,10 +1,10 @@
 import {
   classes,
   Chip,
-  WidgetBase,
   Pagination,
   PaginationComponent,
   PulsingLoadingBar,
+  WidgetTab,
 } from 'shared/ui';
 import { getDifferenceInDays, getEndsInLabel } from 'shared/utils';
 
@@ -18,6 +18,7 @@ import {
 import { StatusChip } from '../components';
 
 interface Properties {
+  twitterHandle: string;
   proposalDetails: ProposalData;
   className?: string;
   top?: number;
@@ -27,6 +28,7 @@ interface Properties {
 }
 
 export const Proposal = ({
+  twitterHandle,
   proposalDetails,
   className,
   top,
@@ -37,13 +39,15 @@ export const Proposal = ({
   const proposalEndDateInMs = new Date(proposalDetails.end.timestamp).getTime();
 
   return (
-    <WidgetBase
+    <WidgetTab
+      twitterHandle={twitterHandle}
       className={classes(
-        'overflow-hidden rounded-[0.375rem] bg-white text-xs leading-tight text-tally-text-primary',
+        'overflow-visible bg-white text-xs leading-tight text-tally-text-primary',
         className,
       )}
       top={top}
       onClose={onClose}
+      tabName="tally"
     >
       <PulsingLoadingBar isLoading={isLoading} />
       <header className="flex items-center justify-between space-x-3">
@@ -91,6 +95,6 @@ export const Proposal = ({
         </div>
         <PaginationComponent pagination={pagination} />
       </footer>
-    </WidgetBase>
+    </WidgetTab>
   );
 };

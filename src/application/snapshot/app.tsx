@@ -29,8 +29,9 @@ export const App = () => {
 
   return (
     <ErrorBoundary exceptionEventName="snapshot-runtime-error">
-      {snapshotHandle ? (
+      {isTwitterHandlePage && snapshotHandle ? (
         <OrganizationProposalsContainer
+          twitterHandle={twitterHandleFromPathname}
           snapshotHandle={snapshotHandle}
           key={snapshotHandle}
         />
